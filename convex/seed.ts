@@ -1,4 +1,5 @@
 import { mutation, query } from "./_generated/server";
+import type { Id } from "./_generated/dataModel";
 import { v } from "convex/values";
 
 const ingredientCategoryValidator = v.union(
@@ -111,7 +112,7 @@ export const seedMockCatalog = mutation({
       });
     }
 
-    const ingredientBySlug = new Map<string, any>();
+    const ingredientBySlug = new Map<string, Id<"ingredients">>();
 
     for (const ingredient of args.ingredients) {
       const ingredientAsset = await ctx.db
@@ -132,7 +133,7 @@ export const seedMockCatalog = mutation({
         .withIndex("by_slug", (q) => q.eq("slug", ingredient.slug))
         .first();
 
-      let ingredientId;
+      let ingredientId: Id<"ingredients">;
       if (existingIngredient) {
         await ctx.db.patch(existingIngredient._id, ingredientDoc);
         ingredientId = existingIngredient._id;
@@ -174,7 +175,7 @@ export const seedMockCatalog = mutation({
         .withIndex("by_slug", (q) => q.eq("slug", cocktail.slug))
         .first();
 
-      let cocktailId;
+      let cocktailId: Id<"cocktails">;
       if (existingCocktail) {
         await ctx.db.patch(existingCocktail._id, cocktailDoc);
         cocktailId = existingCocktail._id;
