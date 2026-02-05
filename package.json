@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "convex:dev": "npx convex dev",
-    "seed:cocktails": "node scripts/seedConvexCocktails.js"
+    "seed:cocktails": "node scripts/seedConvexCocktails.js",
+    "mcp:build": "INPUT=mcp/mcp-app.html vite build --config mcp/vite.config.ts",
+    "mcp:serve": "tsx mcp/main.ts",
+    "mcp:serve:http": "tsx mcp/main.ts --http"
   },
   "repository": {
     "type": "git",
@@ -21,6 +24,15 @@
   },
   "homepage": "https://github.com/matteo8p/cocktail-chat-gpt-app#readme",
   "dependencies": {
-    "convex": "^1.31.7"
+    "@modelcontextprotocol/ext-apps": "^1.0.1",
+    "@modelcontextprotocol/sdk": "^1.26.0",
+    "convex": "^1.31.7",
+    "vite": "^7.3.1",
+    "vite-plugin-singlefile": "^2.3.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   }
 }
