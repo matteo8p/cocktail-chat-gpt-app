@@ -3,7 +3,7 @@ import {
   applyDocumentTheme,
   applyHostFonts,
   applyHostStyleVariables,
-  type McpUiHostContext,
+  type PostMessageTransport,
 } from "@modelcontextprotocol/ext-apps";
 import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import "./global.css";
@@ -46,7 +46,7 @@ const garnishEl = document.getElementById("cocktail-garnish") as HTMLElement;
 const ingredientsEl = document.getElementById("ingredients-list") as HTMLUListElement;
 const instructionsEl = document.getElementById("instructions-list") as HTMLOListElement;
 
-function handleHostContextChanged(ctx: McpUiHostContext) {
+function handleHostContextChanged(ctx: PostMessageTransport) {
   if (ctx.theme) applyDocumentTheme(ctx.theme);
   if (ctx.styles?.variables) applyHostStyleVariables(ctx.styles.variables);
   if (ctx.styles?.css?.fonts) applyHostFonts(ctx.styles.css.fonts);
