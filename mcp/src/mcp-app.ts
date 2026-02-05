@@ -18,7 +18,10 @@ type CocktailRecipe = {
   imageUrl: string | null;
   instructions: string[];
   recipe: Array<{
-    ingredient: { name: string };
+    ingredient: {
+      name: string;
+      imageUrl?: string | null;
+    };
     amount: number;
     unit: string;
     preparation: string | null;
@@ -42,8 +45,6 @@ const glasswareEl = document.getElementById("cocktail-glassware") as HTMLElement
 const garnishEl = document.getElementById("cocktail-garnish") as HTMLElement;
 const ingredientsEl = document.getElementById("ingredients-list") as HTMLUListElement;
 const instructionsEl = document.getElementById("instructions-list") as HTMLOListElement;
-const inputEl = document.getElementById("cocktail-input") as HTMLInputElement;
-const showBtn = document.getElementById("show-btn") as HTMLButtonElement;
 
 function handleHostContextChanged(ctx: McpUiHostContext) {
   if (ctx.theme) applyDocumentTheme(ctx.theme);
@@ -83,9 +84,35 @@ function renderCocktail(cocktail: CocktailRecipe) {
   ingredientsEl.innerHTML = "";
   for (const row of cocktail.recipe) {
     const li = document.createElement("li");
+    li.className = "ingredient-item";
+
+    const image = document.createElement("img");
+    image.className = "ingredient-image";
+    image.loading = "lazy";
+    image.alt = row.ingredient.name;
+    if (row.ingredient.imageUrl) {
+      image.src = row.ingredient.imageUrl;
+    } else {
+      image.classList.add("ingredient-image-placeholder");
+    }
+    li.appendChild(image);
+
+    const details = document.createElement("div");
+    details.className = "ingredient-details";
+
+    const name = document.createElement("span");
+    name.className = "ingredient-name";
+    name.textContent = row.ingredient.name;
+    details.appendChild(name);
+
+    const amount = document.createElement("span");
+    amount.className = "ingredient-amount";
     const amountText = `${row.amount} ${row.unit}`;
     const prep = row.preparation ? ` (${row.preparation})` : "";
-    li.textContent = `${amountText} ${row.ingredient.name}${prep}`;
+    amount.textContent = `${amountText}${prep}`;
+    details.appendChild(amount);
+
+    li.appendChild(details);
     ingredientsEl.appendChild(li);
   }
 
@@ -121,34 +148,6 @@ app.ontoolresult = (result) => {
   }
   renderCocktail(payload.cocktail);
 };
-
-async function requestRecipe() {
-  const cocktail = inputEl.value.trim() || "negroni";
-  const result = await app.callServerTool({
-    name: "show_cocktail_recipe",
-    arguments: { cocktail },
-  });
-  const payload = parsePayload(result);
-  if (!payload.cocktail) {
-    renderNotFound(payload.requested);
-  } else {
-    renderCocktail(payload.cocktail);
-  }
-}
-
-showBtn.addEventListener("click", () => {
-  requestRecipe().catch((err) => {
-    console.error(err);
-    renderNotFound(inputEl.value.trim() || "negroni");
-  });
-});
-
-inputEl.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    showBtn.click();
-  }
-});
 
 app.connect().then(() => {
   const ctx = app.getHostContext();

@@ -142,7 +142,18 @@ export function createServer(): McpServer {
       }
       return {
         contents: [
-          { uri: resourceUri, mimeType: RESOURCE_MIME_TYPE, text: html },
+          {
+            uri: resourceUri,
+            mimeType: RESOURCE_MIME_TYPE,
+            text: html,
+            _meta: {
+              ui: {
+                csp: {
+                  resourceDomains: ["https://abundant-peacock-627.convex.cloud"],
+                },
+              },
+            },
+          },
         ],
       };
     },
