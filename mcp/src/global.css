@@ -1,14 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
 * {
   box-sizing: border-box;
 }
 
-html, body {
-  margin: 0;
-  font-family: var(--font-sans, "IBM Plex Sans", "Avenir Next", "Segoe UI", sans-serif);
-  color: var(--color-text-primary, #1b1f23);
-  background: radial-gradient(circle at 20% 10%, #fff3d9 0%, #f5f1e8 35%, #ece7de 100%);
-}
-
+html,
 body {
-  min-height: 100vh;
+  font-family: "IBM Plex Mono", "JetBrains Mono", "SF Mono", "Menlo", "Consolas", monospace;
+  font-size: 1rem;
+  margin: 0;
+  background: var(--color-background-primary, #ffffff);
+  color: var(--color-text-primary, #111111);
 }
