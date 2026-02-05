@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Cocktail Recipe</title>
+</head>
+<body>
+  <main class="main">
+    <header class="header">
+      <h1 id="cocktail-name">Cocktail Recipe</h1>
+      <p id="cocktail-description" class="description">Ask for a cocktail recipe to render it here.</p>
+    </header>
+
+    <section id="not-found" class="panel hidden">
+      <h2>Not Found</h2>
+      <p id="not-found-text">No cocktail found.</p>
+    </section>
+
+    <section id="recipe-card" class="panel hidden">
+      <img id="cocktail-image" alt="Cocktail image" class="cocktail-image hidden" />
+
+      <div class="meta-grid">
+        <div><span class="label">Method</span><span id="cocktail-method">-</span></div>
+        <div><span class="label">Glassware</span><span id="cocktail-glassware">-</span></div>
+        <div><span class="label">Garnish</span><span id="cocktail-garnish">-</span></div>
+      </div>
+
+      <h2>Ingredients</h2>
+      <ul id="ingredients-list" class="ingredients-list"></ul>
+
+      <h2>Instructions</h2>
+      <ol id="instructions-list" class="instructions-list"></ol>
+    </section>
+
+    <section class="panel">
+      <h2>Try Another</h2>
+      <div class="ask-row">
+        <input id="cocktail-input" type="text" placeholder="e.g. old fashioned" />
+        <button id="show-btn">Show Recipe</button>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="/mcp/src/mcp-app.ts"></script>
+</body>
+</html>

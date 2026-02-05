@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  font-family: var(--font-sans, "IBM Plex Sans", "Avenir Next", "Segoe UI", sans-serif);
+  color: var(--color-text-primary, #1b1f23);
+  background: radial-gradient(circle at 20% 10%, #fff3d9 0%, #f5f1e8 35%, #ece7de 100%);
+}
+
+body {
+  min-height: 100vh;
+}
